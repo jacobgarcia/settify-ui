@@ -1,0 +1,69 @@
+{
+  "name": "settify-ui",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@credijusto/ui-components": "6.0.16",
+    "axios": "0.19.0",
+    "classnames": "2.2.6",
+    "firebase": "6.2.3",
+    "jsonexport": "2.4.1",
+    "logrocket": "1.0.1",
+    "logrocket-react": "3.0.0",
+    "prop-types": "15.7.2",
+    "query-string": "6.8.1",
+    "react": "16.9.0",
+    "react-dom": "16.9.0",
+    "react-google-login": "5.0.3",
+    "react-imported-component": "5.5.3",
+    "react-router-dom": "5.0.0",
+    "store": "2.0.12",
+    "styled-components": "4.3.2",
+    "uuid": "3.3.2",
+    "validator": "11.1.0"
+  },
+  "devDependencies": {
+    "@credijusto/react-scripts": "2.0.2",
+    "@testing-library/jest-dom": "4.0.0",
+    "@testing-library/react": "9.1.2",
+    "eslint-config-js-scripts": "0.0.32",
+    "js-scripts": "0.0.30",
+    "prettier-config-js-scripts": "0.0.30",
+    "stylelint-config-js-scripts": "0.0.31"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "start:production": "/bin/sh -ac 'set -a && . ./.env.production && react-scripts start'",
+    "build:development": "/bin/sh -ac 'set -a && . ./.env && react-scripts build'",
+    "build:production": "/bin/sh -ac 'set -a && . ./.env.production && react-scripts build'",
+    "lint": "js-scripts lint",
+    "test": "TZ=America/New_York react-scripts test --env=jsdom --transformIgnorePatterns \"node_modules/(?!ui-components)/\"",
+    "ci-test": "CI=true TZ=America/New_York react-scripts test",
+    "ci-lint": "CI=true js-scripts lint",
+    "coverage": "test --coverage"
+  },
+  "eslintConfig": {
+    "extends": "js-scripts"
+  },
+  "stylelint": {
+    "extends": "stylelint-config-js-scripts"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "js-scripts precommit"
+    }
+  },
+  "browserslist": {
+    "development": [
+      "last 2 chrome versions",
+      "last 2 firefox versions",
+      "last 2 edge versions"
+    ],
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not ie <= 11",
+      "not op_mini all"
+    ]
+  }
+}

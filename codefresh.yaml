@@ -1,0 +1,79 @@
+---
+version: '1.0'
+stages:
+  - dependencies
+  - test
+  - build
+  - deploy
+
+steps:
+  main_clone:
+    type: 'git-clone'
+    description: 'Clone repository'
+    repo: '${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}'
+    revision: '${{CF_BRANCH}}'
+    stage: 'dependencies'
+
+  builder:
+    type: 'build'
+    description: 'Build docker base image'
+    stage: 'dependencies'
+    image_name: 'settify-ui-builder'
+    tag: '${{CF_SHORT_REVISION}}'
+    target: 'builder'
+
+  pre_checks:
+    type: 'parallel'
+    stage: 'test'
+    steps:
+      load-deps:
+        image: '${{builder}}'
+        description: 'Load deps'
+        commands:
+          - cp -r /app/node_modules .
+
+  checks:
+    type: 'parallel'
+    stage: 'test'
+    steps:
+      unit-tests:
+        image: '${{builder}}'
+        description: 'Unit tests'
+        commands:
+          - npm run ci-test
+
+      linting:
+        image: '${{builder}}'
+        description: 'Linting'
+        commands:
+          - npm run ci-lint
+
+  build:
+    type: 'build'
+    stage: 'build'
+    image_name: 'settify-ui'
+    tag: '${{CF_SHORT_REVISION}}'
+
+  push_staging:
+    stage: 'deploy'
+    type: 'push'
+    candidate: '${{build}}'
+    tag: '${{CF_SHORT_REVISION}}'
+    image_name: 'settify-ui'
+    registry: 'ecr'
+    when:
+      branch:
+        only: ['master']
+
+  deploy_staging:
+    stage: 'deploy'
+    image: r.cfcr.io/jacobgarcia/cli:master
+    cmd: >-
+      deploy
+        --environment=staging
+        --revision=${{CF_SHORT_REVISION}}
+        --kubeconfig=${{CF_KUBECONFIG_PATH}}
+        --sentry-auth-token=${{SENTRY_AUTH_TOKEN}}
+    when:
+      branch:
+        only: ['master']

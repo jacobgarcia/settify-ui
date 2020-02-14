@@ -1,0 +1,23 @@
+---
+application:
+  name: settify-ui
+  kind: frontend
+  source_dirs:
+    - src/
+    - public/
+    - functions/
+    - firebase.json
+    - .env*
+    - .eslintrc
+
+ci:
+  pre_checks:
+    - name: Load deps
+      cmd: cp -r /app/node_modules .
+
+  checks:
+    - name: Unit tests
+      cmd: npm run ci-test
+
+    - name: Linting
+      cmd: npm run ci-lint

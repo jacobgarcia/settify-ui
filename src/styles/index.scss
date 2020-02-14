@@ -1,0 +1,30 @@
+/* All CSS variables and mixins */
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+.credijusto_input {
+  margin-bottom: 1rem;
+}
+
+.credijusto_title {
+  margin-top: 0.67em;
+}
+
+.row {
+  &:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+}
+
+.credijusto_input-error {
+  font-size: 0.875rem;
+}
+
+.isHidden {
+  display: none !important;
+}

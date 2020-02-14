@@ -1,0 +1,41 @@
+.credijusto_imagotype_container {
+  display: block;
+
+  .credijusto_imagotype {
+    &-default,
+    &-white_text,
+    &-white {
+      height: 100%;
+    }
+
+    path {
+      fill-rule: nonzero;
+    }
+
+    &-default,
+    &-white_text {
+      .credijusto_svg--isotype {
+        fill: var(--credijusto-green-light);
+      }
+    }
+
+    &-default {
+      .credijusto_svg--logotype {
+        fill: var(--credijusto-grey-dark);
+      }
+    }
+
+    &-white {
+      .credijusto_svg--logotype path,
+      .credijusto_svg--isotype path {
+        fill: var(--color-light-grey-100);
+      }
+    }
+
+    &-white_text {
+      .credijusto_svg--logotype path {
+        fill: var(--color-light-grey-100);
+      }
+    }
+  }
+}

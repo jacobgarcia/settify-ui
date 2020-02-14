@@ -1,0 +1,200 @@
+{
+  "FORM_OPTIONS": {
+    "TYPE_OPTIONS": [
+      {
+        "key": "formal",
+        "value": "Formal"
+      },
+      {
+        "key": "cash",
+        "value": "Efectivo"
+      },
+      {
+        "key": "mixed",
+        "value": "Mixto"
+      }
+    ],
+    "INCOME_TYPES": [
+      {
+        "key": 2,
+        "value": "Doble contabilidad"
+      },
+      {
+        "key": 1,
+        "value": "Ingresos Normales"
+      }
+    ],
+    "SOPHISTICATION_LEVELS": [
+      {
+        "key": 0,
+        "value": "No aceptable"
+      },
+      {
+        "key": 1,
+        "value": "Informal"
+      },
+      {
+        "key": 3,
+        "value": "Normal"
+      },
+      {
+        "key": 6,
+        "value": "Sofisticado"
+      }
+    ],
+    "CLIENTS_OPTIONS": [
+      {
+        "key": 0,
+        "value": "No aceptable"
+      },
+      {
+        "key": 1,
+        "value": "Bajo 5-9"
+      },
+      {
+        "key": 3,
+        "value": "Normal 10-30"
+      },
+      {
+        "key": 6,
+        "value": "Alto > 30"
+      }
+    ],
+    "COLLATERAL_TYPES": [
+      {
+        "key": 1,
+        "value": "Propiedad no habitada de persona no relacionada al prestamo"
+      },
+      {
+        "key": 2,
+        "value": "Propiedad no habitada de familiar en primer grado"
+      },
+      {
+        "key": 3,
+        "value": "Propiedad no habitada del prestatario"
+      },
+      {
+        "key": 4,
+        "value": "Residencia primaria de persona no relacionada al prestamo"
+      },
+      {
+        "key": 5,
+        "value": "Residencia secundaria del prestatario o de familiar en primer grado"
+      },
+      {
+        "key": 6,
+        "value": "Residencia primaria del prestatario, de familiar en primer grado o lugar de negocio"
+      }
+    ],
+    "PAYMENT_HISTORY_OPTIONS": [
+      {
+        "key": 0,
+        "value": "Sin historial"
+      },
+      {
+        "key": 1,
+        "value": "Presenta un default"
+      },
+      {
+        "key": 2,
+        "value": "Retrasos menores a 120 dias o 3 meses o mas con retrasos de 60 dias en el historial"
+      },
+      {
+        "key": 3,
+        "value": "Retrasos menores a 90 dias"
+      },
+      {
+        "key": 4,
+        "value": "Retrasos menores a 60 dias"
+      },
+      {
+        "key": 5,
+        "value": "Obligaciones pagadas a tiempo. Pocos retrasos en su historial"
+      },
+      {
+        "key": 6,
+        "value": "Cumple con todas sus obligaciones a tiempo (Historial impecable)"
+      }
+    ],
+    "TOTAL_PAYMENT_COMMITMENTS": [
+      {
+        "key": 0,
+        "value": "No hay informacion aún"
+      },
+      {
+        "key": -1,
+        "value": "Sus pagos representan mas del 50% de sus ingresos (Inaceptable)"
+      },
+      {
+        "key": 1,
+        "value": "Sus pagos representan 50% o menos de sus ingresos"
+      },
+      {
+        "key": 3,
+        "value": "Sus pagos representan 35% o menos de sus ingresos"
+      },
+      {
+        "key": 6,
+        "value": "Sus pagos representan 20% o menos de sus ingresos"
+      }
+    ],
+    "ASSET_BACKED": [
+      {
+        "key": 0,
+        "value": "No hay informacion aún"
+      },
+      {
+        "key": -1,
+        "value": "Sus pagos representan mas del 35% de sus ingresos (Inaceptable)"
+      },
+      {
+        "key": 1,
+        "value": "Sus pagos representan 35% o menos de sus ingresos"
+      },
+      {
+        "key": 3,
+        "value": "Sus pagos representan 25% o menos de sus ingresos"
+      },
+      {
+        "key": 6,
+        "value": "Sus pagos representan 10% o menos de sus ingresos"
+      }
+    ]
+  },
+  "RULES": {
+    "PREMIUM": {
+      "LIFE_INSURANCE_MIN_PREMIUM": 1,
+      "LIFE_INSURANCE_MAX_PREMIUM": 10000,
+      "PREMIUM_BASE_INTEREST_RATE_MIN_PREMIUM": 18,
+      "BASE_INTEREST_RATE_MIN": 24,
+      "BASE_INTEREST_RATE_MAX": 38,
+      "LIFE_INSURANCE_MIN": 0,
+      "LIFE_INSURANCE_MAX": 7,
+      "OPENING_FEE_MIN": 0,
+      "OPENING_FEE_MAX": 7.5,
+      "GRACE_PERIOD_MAX": 6,
+      "PRINCIPAL_MIN": 150000,
+      "PRINCIPAL_MAX": 10800000,
+      "PRINCIPAL_MIN_USD": 7500,
+      "PRINCIPAL_MAX_USD": 600000,
+      "PRINCIPAL_MIN_PREMIUM": 0,
+      "DURATION_MIN": 1,
+      "DURATION_MAX": 60,
+      "AFORO_MIN_RATE": 1.55
+    },
+    "REGULAR": {
+      "BASE_INTEREST_RATE_MIN": 26,
+      "BASE_INTEREST_RATE_MAX": 38,
+      "OPENING_FEE_MIN": 2,
+      "OPENING_FEE_MAX": 7.5,
+      "GRACE_PERIOD_MAX": 3,
+      "PRINCIPAL_MIN": 200000,
+      "PRINCIPAL_MAX": 10800000,
+      "PRINCIPAL_MIN_USD": 7500,
+      "PRINCIPAL_MAX_USD": 600000,
+      "DURATION_MIN": 1,
+      "DURATION_MAX": 48,
+      "AFORO_MIN_RATE": 1.85
+    }
+  }
+}

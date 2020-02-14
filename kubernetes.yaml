@@ -1,0 +1,80 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: settify-ui
+  namespace: settify-ui
+  labels:
+    app: settify-ui
+    version: '{{ .Revision }}'
+    app.kubernetes.io/managed-by: codefresh
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: settify-ui
+  template:
+    metadata:
+      labels:
+        app: settify-ui
+        version: '{{ .Revision }}'
+        app.kubernetes.io/managed-by: codefresh
+    spec:
+      serviceAccountName: 'settify-ui'
+      containers:
+        - name: settify-ui
+          image: '{{ .DockerImage }}:{{ .Revision }}'
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 80
+          readinessProbe:
+            httpGet:
+              path: /_healthcheck
+              port: http
+          livenessProbe:
+            httpGet:
+              path: /_healthcheck
+              port: http
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: settify-ui
+  namespace: settify-ui
+  labels:
+    app: settify-ui
+    version: '{{ .Revision }}'
+    app.kubernetes.io/managed-by: codefresh
+spec:
+  selector:
+    app: settify-ui
+  ports:
+    - name: settify-ui
+      port: 80
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: settify-ui
+  namespace: settify-ui
+  labels:
+    app: settify-ui
+    version: '{{ .Revision }}'
+    buildId: '{{ .BuildId }}'
+    app.kubernetes.io/managed-by: codefresh
+  annotations:
+    kubernetes.io/ingress.class: nginx-private
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      proxy_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
+spec:
+  tls:
+    - hosts:
+        - settify-ui.{{ .Environment.Domain }}
+  rules:
+    - host: settify-ui.{{ .Environment.Domain }}
+      http:
+        paths:
+          - backend:
+              serviceName: settify-ui
+              servicePort: 80

@@ -1,0 +1,39 @@
+---
+name: Logo
+route: /logo
+menu: Components
+---
+
+import { Playground, Props } from 'docz';
+import { BrowserRouter } from 'react-router-dom';
+
+import Logo from '.';
+
+# `<Logo />`
+
+Image, displays Credijusto's logo.
+
+### Props
+
+<Props of={Logo} />
+
+### Default logo
+
+<Playground>
+  <BrowserRouter>
+    <Logo />
+  </BrowserRouter>
+</Playground>
+
+### Variants
+
+<Playground style={{ backgroundColor: '#BBB' }}>
+  <BrowserRouter>
+    default: <Logo kind="default" />
+    <br />
+    white: <Logo kind="white" />
+    <br />
+    white_text: <Logo kind="white_text" />
+    <br />
+  </BrowserRouter>
+</Playground>

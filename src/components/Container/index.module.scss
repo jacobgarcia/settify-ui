@@ -1,0 +1,6 @@
+/* All CSS variables and mixins */
+@import '~@credijusto/ui-components/lib/styles/sass/variables';
+
+.container {
+  @extend %app-width;
+}

@@ -1,0 +1,10 @@
+*
+!.env
+!conf/
+!jsconfig.json
+!package-lock.json
+!package.json
+!src/
+!public/
+!functions/
+!.env*
