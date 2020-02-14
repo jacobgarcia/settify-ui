@@ -2,25 +2,15 @@ import axios from 'axios';
 import store from 'store';
 import queryString from 'query-string';
 
-import { arrayBufferToString } from 'utils';
-
 const PRICY_TOKEN_NAME = 'pricyToken';
 
-const baseURL = process.env.REACT_APP_API_URL;
+const baseURL =
+  'https://accounts.spotify.com/authorize?client_id=8be10436cdeb41deab45fc7502265679&redirect_uri=http://localhost:5000/&scope=user-read-private%20user-read-email&response_type=token&state=123';
 
-const handleUnauthorized = ({ status, message }) => {
+const handleUnauthorized = ({ status }) => {
   if (status === 401) {
     store.remove(PRICY_TOKEN_NAME);
     window.location.reload();
-  }
-
-  if (message) {
-    if (message instanceof ArrayBuffer) {
-      const abMessage = arrayBufferToString(message);
-      throw abMessage;
-    } else {
-      throw new Error(message);
-    }
   }
 
   if (status === 403) {
@@ -76,8 +66,7 @@ const request = async ({
 };
 
 const Login = {
-  authenticate: (data) =>
-    request({ url: '/authenticate/', data, skipAuth: true }),
+  authenticate: (data) => request({ data, skipAuth: true }),
 };
 
 const Aurum = {
