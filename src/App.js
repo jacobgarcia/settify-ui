@@ -1,5 +1,5 @@
 // Libraries
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { NotificationsProvider } from '@credijusto/ui-components';
 // Components
@@ -12,8 +12,30 @@ import useAuth from 'hooks/auth';
 import 'styles/index.scss';
 // constants
 
+// Get the hash of the url
+const hash = window.location.hash
+  .substring(1)
+  .split('&')
+  .reduce((initial, item) => {
+    const init = initial;
+    if (item) {
+      const parts = item.split('=');
+      init[parts[0]] = decodeURIComponent(parts[1]);
+    }
+    return initial;
+  }, {});
+
 const App = () => {
-  const { hasToken } = useAuth();
+  const { hasToken, authenticate } = useAuth();
+
+  useEffect(() => {
+    // Set token
+    const { access_token: token, expires_in: expiration } = hash;
+    if (token) {
+      // Set token
+      authenticate({ token, expiration: Date.now() + expiration });
+    }
+  });
 
   const Component = hasToken ? Settify : Login;
   return (

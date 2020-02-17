@@ -6,6 +6,7 @@
     "@credijusto/ui-components": "6.0.16",
     "axios": "0.19.0",
     "classnames": "2.2.6",
+    "enzyme": "^3.11.0",
     "firebase": "6.2.3",
     "jsonexport": "2.4.1",
     "logrocket": "1.0.1",

@@ -65,10 +65,6 @@ const request = async ({
   }
 };
 
-const Login = {
-  authenticate: (data) => request({ data, skipAuth: true }),
-};
-
 const Aurum = {
   GetOpportunity: (id) => request({ url: `/aurum/opportunity/?id=${id}` }),
   UpdateOpportunity: (id, data) =>
@@ -77,6 +73,5 @@ const Aurum = {
 };
 
 export default {
-  Login,
   Aurum,
 };
