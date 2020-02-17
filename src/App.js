@@ -33,7 +33,10 @@ const App = () => {
     const { access_token: token, expires_in: expiration } = hash;
     if (token) {
       // Set token
-      authenticate({ token, expiration: Date.now() + expiration });
+      authenticate({
+        token,
+        expiration: parseInt(Date.now(), 10) + parseInt(expiration, 10),
+      });
     }
   });
 

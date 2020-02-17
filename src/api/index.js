@@ -2,14 +2,13 @@ import axios from 'axios';
 import store from 'store';
 import queryString from 'query-string';
 
-const PRICY_TOKEN_NAME = 'pricyToken';
+const SETTIFY_TOKEN_NAME = 'spotifyToken';
 
-const baseURL =
-  'https://accounts.spotify.com/authorize?client_id=8be10436cdeb41deab45fc7502265679&redirect_uri=http://localhost:5000/&scope=user-read-private%20user-read-email&response_type=token&state=123';
+const baseURL = process.env.REACT_APP_API_URL;
 
 const handleUnauthorized = ({ status }) => {
   if (status === 401) {
-    store.remove(PRICY_TOKEN_NAME);
+    store.remove(SETTIFY_TOKEN_NAME);
     window.location.reload();
   }
 
@@ -35,7 +34,7 @@ const request = async ({
   const headers = { 'Content-Type': contentType };
 
   if (!skipAuth) {
-    headers.Authorization = `Token ${store.get(PRICY_TOKEN_NAME)}`;
+    headers.Authorization = `Token ${store.get(SETTIFY_TOKEN_NAME)}`;
   }
 
   try {
