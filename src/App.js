@@ -28,17 +28,21 @@ const hash = window.location.hash
 const App = () => {
   const { hasToken, authenticate } = useAuth();
 
-  useEffect(() => {
-    // Set token
-    const { access_token: token, expires_in: expiration } = hash;
-    if (token) {
+  useEffect(
+    () => {
       // Set token
-      authenticate({
-        token,
-        expiration: parseInt(Date.now(), 10) + parseInt(expiration, 10),
-      });
-    }
-  });
+      const { access_token: token, expires_in: expiration } = hash;
+      if (token) {
+        // Set token
+        authenticate({
+          token,
+          expiration: parseInt(Date.now(), 10) + parseInt(expiration, 10),
+        });
+      }
+      window.history.pushState({}, document.title, '/');
+    },
+    [hash]
+  );
 
   const Component = hasToken ? Settify : Login;
   return (

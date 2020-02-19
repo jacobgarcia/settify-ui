@@ -5,7 +5,7 @@ import { Route, Switch } from 'react-router-dom';
 import { AppWrapper } from '@credijusto/ui-components';
 
 import Container from 'components/Container';
-import Test from 'components/Test';
+import Playlists from 'components/Playlists';
 import AppFooter from 'components/AppFooter';
 
 const Settify = () => {
@@ -13,7 +13,7 @@ const Settify = () => {
     <AppWrapper hasNavbar>
       <Container>
         <Switch>
-          <Route exact path={['/']} component={Test} />
+          <Route exact path={['/']} component={Playlists} />
         </Switch>
       </Container>
       <AppFooter />

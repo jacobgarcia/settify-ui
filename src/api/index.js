@@ -34,7 +34,7 @@ const request = async ({
   const headers = { 'Content-Type': contentType };
 
   if (!skipAuth) {
-    headers.Authorization = `Token ${store.get(SETTIFY_TOKEN_NAME)}`;
+    headers.Authorization = `Bearer ${store.get(SETTIFY_TOKEN_NAME).token}`;
   }
 
   try {
@@ -64,13 +64,10 @@ const request = async ({
   }
 };
 
-const Aurum = {
-  GetOpportunity: (id) => request({ url: `/aurum/opportunity/?id=${id}` }),
-  UpdateOpportunity: (id, data) =>
-    request({ url: `/aurum/opportunity/?id=${id}`, data, method: 'patch' }),
-  GetCustomer: (id) => request({ url: `/aurum/customer/?id=${id}` }),
+const Spotify = {
+  GetPlaylists: (offset) => request({ url: `/playlists?offset=${offset}` }),
 };
 
 export default {
-  Aurum,
+  Spotify,
 };
