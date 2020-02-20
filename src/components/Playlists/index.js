@@ -4,11 +4,11 @@ import {
   AppTitle,
   Card,
   ViewLoader,
-  Table,
   Notify,
   Pagination,
   withRouter,
 } from '@credijusto/ui-components';
+import Table from 'components/Table';
 import API from 'api';
 
 const columns = [
