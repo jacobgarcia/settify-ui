@@ -1,13 +1,14 @@
-.cj_switch {
+.credijusto_switch {
   display: none;
   margin: 8px 0 0 16px;
   position: absolute;
 
   & + label {
     cursor: pointer;
-    height: 26px;
+    height: 21px;
+    line-height: 2em;
     margin-right: 4px;
-    padding: 0 0 0 50px;
+    padding: 5px 0 0 44px;
     position: relative;
   }
 
@@ -61,14 +62,12 @@
   }
 }
 
-.cj_checkbox {
+.credijusto_checkbox {
   appearance: none;
   background-color: transparent;
-  height: 22px;
-  margin: 0;
-  outline: none;
+  bottom: -2px;
+  left: 4px;
   position: relative;
-  width: 22px;
 
   + span {
     align-self: center;
@@ -77,14 +76,10 @@
     font-size: 0.875rem;
   }
 
-  &--component {
-    margin-bottom: 0;
-  }
-
   &--wrapper {
     display: flex;
 
-    .cj_checkbox {
+    .credijusto_checkbox {
       margin-right: 0.5rem;
     }
   }
@@ -130,8 +125,7 @@
 
   &:focus {
     &::before {
-      border-color: var(--color-light-grey-600);
-      box-shadow: 0 0 0 2px var(--input-outline), 0 0 0 2px var(--input-outline);
+      box-shadow: 0 0 4px 4px var(--color-green-100);
     }
   }
 
@@ -140,7 +134,7 @@
 
     &::before {
       background-color: var(--color-light-grey-200);
-      border: 2px solid var(--color-light-grey-300);
+      border: 2px solid var(--color-light-grey-500);
     }
   }
 }

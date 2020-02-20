@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 
 import { Emptiness, Loading, ViewLoader } from '@credijusto/ui-components';
 
-import CJCheckbox from 'components/CJCheckbox';
+import Checkbox from 'components/Checkbox';
 import Head from './Head';
 import Body from './Body';
 import Footer from './Footer';
@@ -81,18 +81,24 @@ const Table = ({
   totals,
   averages,
   alternateLinkStyle,
+  handleChange,
 }) => {
   const headRef = useRef(null);
 
   const [sortBy, setSortBy] = useState('');
   const [newColumns, setNewColumns] = useState(columns);
-
   // Add CJCheckbox as a first column
   useEffect(
     () => {
       const checkedColumn = {
-        key: 'here',
-        cellRender: () => <CJCheckbox name="default_checked" value />,
+        key: 'check',
+        cellRender: (check) => (
+          <Checkbox
+            name={check}
+            value
+            onChange={(value, name) => handleChange(value, name)}
+          />
+        ),
       };
       const arr = [...newColumns];
       arr.unshift(checkedColumn);
@@ -137,7 +143,7 @@ const Table = ({
   const formatData = (originalData) => {
     return originalData.map((item) => {
       const modifiedItem = {
-        here: 'true',
+        check: item.id,
       };
       return { ...item, ...modifiedItem };
     });
@@ -222,6 +228,7 @@ Table.propTypes = {
   totals: PropTypes.arrayOf(PropTypes.string),
   averages: PropTypes.arrayOf(PropTypes.string),
   alternateLinkStyle: PropTypes.bool,
+  handleChange: PropTypes.func.isRequired,
 };
 
 export default Table;

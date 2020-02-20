@@ -66,6 +66,10 @@ const request = async ({
 
 const Spotify = {
   GetPlaylists: (offset) => request({ url: `/playlists?offset=${offset}` }),
+  GetIntersection: (firstPlaylist, secondPlaylist) =>
+    request({
+      url: `/intersect?firstPlaylist=${firstPlaylist}&secondPlaylist=${secondPlaylist}`,
+    }),
 };
 
 export default {

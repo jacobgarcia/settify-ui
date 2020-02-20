@@ -8,6 +8,8 @@ import {
   Pagination,
   withRouter,
 } from '@credijusto/ui-components';
+
+import Actions from 'components/Actions';
 import Table from 'components/Table';
 import API from 'api';
 
@@ -37,6 +39,16 @@ const Playlists = ({ queryParams }) => {
   const [data, setData] = useState([]);
   const [totalItems, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
+
+  const [selectedRows, setSelectedRows] = useState([]);
+  const handleChange = (value, name) => {
+    if (value) {
+      setSelectedRows((state) => [...state, name]);
+    }
+    if (!value) {
+      setSelectedRows((state) => state.filter((e) => e !== name));
+    }
+  };
 
   const getData = async () => {
     try {
@@ -69,6 +81,7 @@ const Playlists = ({ queryParams }) => {
             rowUniqueIdentifier="id"
             loading={loading}
             data={data}
+            handleChange={handleChange}
           />
         </ViewLoader>
 
@@ -79,6 +92,7 @@ const Playlists = ({ queryParams }) => {
           disabled={loading}
         />
       </Card>
+      <Actions selectedRows={selectedRows} />
     </>
   );
 };
