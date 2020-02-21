@@ -201,7 +201,7 @@ export const StyledCell = styled.td`
 export const ColouredLink = styled(({ linkColor, ...rest }) => {
   const { to, children } = rest;
   return (
-    <StyledLink href={to} linkColor={linkColor}>
+    <StyledLink href={to} linkColor={linkColor} target="_blank">
       {children}
     </StyledLink>
   );

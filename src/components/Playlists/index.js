@@ -7,10 +7,13 @@ import {
   Notify,
   Pagination,
   withRouter,
+  Title,
+  Box,
 } from '@credijusto/ui-components';
 
-import Actions from 'components/Actions';
 import Table from 'components/Table';
+import Success from 'components/Success';
+import Button from 'components/Button';
 import API from 'api';
 
 const columns = [
@@ -39,8 +42,9 @@ const Playlists = ({ queryParams }) => {
   const [data, setData] = useState([]);
   const [totalItems, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
-
   const [selectedRows, setSelectedRows] = useState([]);
+  const [success, setSuccess] = useState({});
+
   const handleChange = (value, name) => {
     if (value) {
       setSelectedRows((state) => [...state, name]);
@@ -64,22 +68,65 @@ const Playlists = ({ queryParams }) => {
     }
   };
 
+  const getIntersection = async () => {
+    try {
+      setLoading(true);
+      const [firstPlaylist, secondPlaylist] = selectedRows;
+      const intersectionData = await API.Spotify.GetIntersection(
+        firstPlaylist,
+        secondPlaylist
+      );
+      setSuccess(intersectionData);
+    } catch (error) {
+      Notify.error('An error occured while intersecting the playlists');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(
     () => {
       getData();
     },
     [queryParams]
   );
+
+  if (Object.entries(success).length > 0) {
+    return (
+      <Success
+        message={`You're new playlist ${success.name} is ready!`}
+        description={`${success.name} contains a total of ${
+          success.tracks
+        } tracks. You can check your playlist on Spotify right now or continue in Settify.`}
+        action={
+          <Box gap="space-400">
+            <Box direction="row" gap="space-200" justify="center">
+              <a
+                href={`https://open.spotify.com/playlist/${success.href}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button>Take me there!</Button>
+              </a>
+              <Button kind="secondary" onClick={() => window.location.reload()}>
+                Continue
+              </Button>
+            </Box>
+          </Box>
+        }
+      />
+    );
+  }
+
   return (
     <>
       <AppTitle title="My Playlists" />
       <Card>
-        <ViewLoader>
+        <ViewLoader loading={loading}>
           <Table
             columns={columns}
             emptiness="No data to show"
             rowUniqueIdentifier="id"
-            loading={loading}
             data={data}
             handleChange={handleChange}
           />
@@ -92,7 +139,17 @@ const Playlists = ({ queryParams }) => {
           disabled={loading}
         />
       </Card>
-      <Actions selectedRows={selectedRows} />
+      {/* Actions */}
+      <Title level={1}>Actions</Title>
+      <Card>
+        <Button
+          disabled={selectedRows.length !== 2}
+          onClick={() => getIntersection()}
+          loading={loading}
+        >
+          Intersect
+        </Button>
+      </Card>
     </>
   );
 };
