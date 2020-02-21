@@ -1,4 +1,4 @@
-.credijusto_switch {
+.credijusto_switchie {
   display: none;
   margin: 8px 0 0 16px;
   position: absolute;
@@ -85,7 +85,7 @@
   }
 
   &::before {
-    border: 2px solid var(--color-green-400);
+    border: 2px solid var(--color-primary);
     border-radius: 4px;
     content: '';
     display: inline-block;
@@ -97,7 +97,7 @@
 
   &:checked {
     &::before {
-      background-color: var(--color-green-400);
+      background-color: var(--color-primary);
       transition: background-color 120ms ease-in-out;
     }
 
@@ -119,13 +119,13 @@
     cursor: pointer;
 
     &::before {
-      border: 2px solid var(--color-green-500);
+      border: 2px solid #bfadea;
     }
   }
 
   &:focus {
     &::before {
-      box-shadow: 0 0 4px 4px var(--color-green-100);
+      box-shadow: 0 0 4px 4px transparent;
     }
   }
 

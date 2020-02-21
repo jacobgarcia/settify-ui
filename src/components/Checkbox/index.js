@@ -6,7 +6,7 @@ import classnames from 'classnames';
 
 import FormItem from 'components/FormItem';
 
-import './style.pcss';
+import './style.scss';
 
 /**
  * @typedef {Object} Input

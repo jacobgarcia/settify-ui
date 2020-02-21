@@ -108,7 +108,7 @@ const Row = ({
 Row.defaultProps = {
   columns: [],
   compact: false,
-  linkColor: 'var(--color-green-500)',
+  linkColor: '#a089d6',
   alternateLinkStyle: false,
 };
 

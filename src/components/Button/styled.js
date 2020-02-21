@@ -1,21 +1,21 @@
 import styled, { css } from 'styled-components';
 
 const PRIMARY_STYLE = css`
-  background-color: var(--color-action);
+  background-color: var(--color-primary);
   color: var(--color-light-grey-100);
 
   &:hover,
   &:active {
-    background-color: var(--color-action--dark);
+    background-color: var(--color-primary-dark);
   }
   &:focus {
     :before {
-      border-color: var(--color-action);
+      border-color: var(--color-primary);
     }
   }
   &:disabled {
-    background-color: var(--color-action--lighter);
-    color: var(--color-action--muted);
+    background-color: var(--color-primary-lighter);
+    color: var(--color-neutral--light);
   }
 `;
 
