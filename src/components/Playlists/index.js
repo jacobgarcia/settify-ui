@@ -5,7 +5,6 @@ import {
   Card,
   ViewLoader,
   Notify,
-  Pagination,
   withRouter,
   Title,
   Box,
@@ -14,6 +13,7 @@ import {
 import Table from 'components/Table';
 import Success from 'components/Success';
 import Button from 'components/Button';
+import Pagination from 'components/Pagination';
 import API from 'api';
 
 const columns = [
@@ -133,7 +133,7 @@ const Playlists = ({ queryParams }) => {
         </ViewLoader>
 
         <Pagination
-          currentPage={1}
+          currentPage={queryParams.page}
           totalItems={totalItems}
           itemsPerPage={ITEMS_PER_PAGE}
           disabled={loading}

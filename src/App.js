@@ -27,7 +27,6 @@ const hash = window.location.hash
 
 const App = () => {
   const { hasToken, authenticate } = useAuth();
-
   useEffect(
     () => {
       // Set token
@@ -36,7 +35,8 @@ const App = () => {
         // Set token
         authenticate({
           token,
-          expiration: parseInt(Date.now(), 10) + parseInt(expiration, 10),
+          expiration:
+            parseInt(Date.now(), 10) + parseInt(expiration * 1000, 10),
         });
       }
       window.history.pushState({}, document.title, '/');
