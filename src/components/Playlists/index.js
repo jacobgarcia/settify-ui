@@ -44,6 +44,7 @@ const Playlists = ({ queryParams }) => {
   const [loading, setLoading] = useState(true);
   const [selectedRows, setSelectedRows] = useState([]);
   const [success, setSuccess] = useState({});
+  const [failure, setFailure] = useState(false);
 
   const handleChange = (value, name) => {
     if (value) {
@@ -76,7 +77,11 @@ const Playlists = ({ queryParams }) => {
         firstPlaylist,
         secondPlaylist
       );
-      setSuccess(intersectionData);
+      if (intersectionData) {
+        setSuccess(intersectionData);
+      } else {
+        setFailure(true);
+      }
     } catch (error) {
       Notify.error('An error occured while intersecting the playlists');
     } finally {
@@ -94,7 +99,7 @@ const Playlists = ({ queryParams }) => {
   if (Object.entries(success).length > 0) {
     return (
       <Success
-        message={`You're new playlist ${success.name} is ready!`}
+        message={`Your new playlist ${success.name} is ready!`}
         description={`${success.name} contains a total of ${
           success.tracks
         } tracks. You can check your playlist on Spotify right now or continue in Settify.`}
@@ -108,6 +113,25 @@ const Playlists = ({ queryParams }) => {
               >
                 <Button>Take me there!</Button>
               </a>
+              <Button kind="secondary" onClick={() => window.location.reload()}>
+                Continue
+              </Button>
+            </Box>
+          </Box>
+        }
+      />
+    );
+  }
+
+  if (failure) {
+    return (
+      <Success
+        message="Your playlist could not be created :("
+        description="There are no tracks matching between the playlists."
+        fail
+        action={
+          <Box gap="space-400">
+            <Box direction="row" gap="space-200" justify="center">
               <Button kind="secondary" onClick={() => window.location.reload()}>
                 Continue
               </Button>
