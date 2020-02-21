@@ -70,6 +70,10 @@ const Spotify = {
     request({
       url: `/intersection?firstPlaylist=${firstPlaylist}&secondPlaylist=${secondPlaylist}`,
     }),
+  GetUnion: (firstPlaylist, secondPlaylist) =>
+    request({
+      url: `/union?firstPlaylist=${firstPlaylist}&secondPlaylist=${secondPlaylist}`,
+    }),
 };
 
 export default {

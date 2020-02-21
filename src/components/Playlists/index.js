@@ -45,6 +45,7 @@ const Playlists = ({ queryParams }) => {
   const [selectedRows, setSelectedRows] = useState([]);
   const [success, setSuccess] = useState({});
   const [failure, setFailure] = useState(false);
+  const [responseTime, setResponseTime] = useState(0);
 
   const handleChange = (value, name) => {
     if (value) {
@@ -73,10 +74,14 @@ const Playlists = ({ queryParams }) => {
     try {
       setLoading(true);
       const [firstPlaylist, secondPlaylist] = selectedRows;
+      const startTime = Date.now();
       const intersectionData = await API.Spotify.GetIntersection(
         firstPlaylist,
         secondPlaylist
       );
+      const endTime = Date.now();
+      const time = endTime - startTime;
+      setResponseTime(time);
       if (intersectionData) {
         setSuccess(intersectionData);
       } else {
@@ -84,6 +89,30 @@ const Playlists = ({ queryParams }) => {
       }
     } catch (error) {
       Notify.error('An error occured while intersecting the playlists');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const getUnion = async () => {
+    try {
+      setLoading(true);
+      const [firstPlaylist, secondPlaylist] = selectedRows;
+      const startTime = Date.now();
+      const intersectionData = await API.Spotify.GetUnion(
+        firstPlaylist,
+        secondPlaylist
+      );
+      const endTime = Date.now();
+      const time = endTime - startTime;
+      setResponseTime(time);
+      if (intersectionData) {
+        setSuccess(intersectionData);
+      } else {
+        setFailure(true);
+      }
+    } catch (error) {
+      Notify.error('An error occured while operating with the playlists');
     } finally {
       setLoading(false);
     }
@@ -102,7 +131,7 @@ const Playlists = ({ queryParams }) => {
         message={`Your new playlist ${success.name} is ready!`}
         description={`${success.name} contains a total of ${
           success.tracks
-        } tracks. You can check your playlist on Spotify right now or continue in Settify.`}
+        } tracks. You can check your playlist on Spotify right now or continue in Settify. It took me around ${responseTime} ms to process this request.`}
         action={
           <Box gap="space-400">
             <Box direction="row" gap="space-200" justify="center">
@@ -127,7 +156,7 @@ const Playlists = ({ queryParams }) => {
     return (
       <Success
         message="Your playlist could not be created :("
-        description="There are no tracks matching between the playlists."
+        description={`There are no tracks matching between the playlists. It took me around ${responseTime} ms to process this request.`}
         fail
         action={
           <Box gap="space-400">
@@ -166,13 +195,23 @@ const Playlists = ({ queryParams }) => {
       {/* Actions */}
       <Title level={1}>Actions</Title>
       <Card>
-        <Button
-          disabled={selectedRows.length !== 2}
-          onClick={() => getIntersection()}
-          loading={loading}
-        >
-          Intersect
-        </Button>
+        <Box direction="row" gap="space-200">
+          <Button
+            disabled={selectedRows.length !== 2}
+            onClick={() => getIntersection()}
+            loading={loading}
+          >
+            Intersect
+          </Button>
+          <Button
+            kind="secondary"
+            disabled={selectedRows.length !== 2}
+            onClick={() => getUnion()}
+            loading={loading}
+          >
+            Unify
+          </Button>
+        </Box>
       </Card>
     </>
   );
