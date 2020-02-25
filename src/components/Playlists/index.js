@@ -15,6 +15,7 @@ import Success from 'components/Success';
 import Button from 'components/Button';
 import Pagination from 'components/Pagination';
 import API from 'api';
+import { intersect } from 'api/spotify';
 
 const columns = [
   {
@@ -79,6 +80,27 @@ const Playlists = ({ queryParams }) => {
         firstPlaylist,
         secondPlaylist
       );
+      const endTime = Date.now();
+      const time = endTime - startTime;
+      setResponseTime(time);
+      if (intersectionData) {
+        setSuccess(intersectionData);
+      } else {
+        setFailure(true);
+      }
+    } catch (error) {
+      Notify.error('An error occured while intersecting the playlists');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const getIntersectionJS = async () => {
+    try {
+      setLoading(true);
+      const [firstPlaylist, secondPlaylist] = selectedRows;
+      const startTime = Date.now();
+      const intersectionData = await intersect(firstPlaylist, secondPlaylist);
       const endTime = Date.now();
       const time = endTime - startTime;
       setResponseTime(time);
@@ -210,6 +232,14 @@ const Playlists = ({ queryParams }) => {
             loading={loading}
           >
             Unify
+          </Button>
+          <Button
+            kind="warning"
+            disabled={selectedRows.length !== 2}
+            onClick={() => getIntersectionJS()}
+            loading={loading}
+          >
+            IntersectJS
           </Button>
         </Box>
       </Card>

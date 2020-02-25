@@ -20,6 +20,7 @@
     "react-spotify-login": "^0.9.1",
     "store": "2.0.12",
     "styled-components": "4.3.2",
+    "unique-names-generator": "4.2.0",
     "uuid": "3.3.2",
     "validator": "11.1.0"
   },
