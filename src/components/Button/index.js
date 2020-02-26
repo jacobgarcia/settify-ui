@@ -28,6 +28,7 @@ const Button = (props) => {
       onClick={onClick}
       disabled={disabled || loading}
       kind={kind}
+      rounded={rounded}
       {...rest}
     >
       <Box direction="row" justify="center" margin={{ gap: 'space-100' }}>

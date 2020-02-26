@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from '@credijusto/ui-components';
+import Button from 'components/Button';
 
 const LoginButton = () => {
   return (
