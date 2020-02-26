@@ -6,7 +6,6 @@ import {
   ViewLoader,
   Notify,
   withRouter,
-  Title,
   Box,
 } from '@credijusto/ui-components';
 
@@ -197,50 +196,49 @@ const Playlists = ({ queryParams }) => {
     <>
       <AppTitle title="My Playlists" />
       <Card>
-        <ViewLoader loading={loading}>
-          <Table
-            columns={columns}
-            emptiness="No data to show"
-            rowUniqueIdentifier="id"
-            data={data}
-            handleChange={handleChange}
-          />
-        </ViewLoader>
+        {/* Actions */}
+        <Box gap="space-200">
+          <Box direction="row" gap="space-200" justify="center">
+            <Button
+              disabled={selectedRows.length !== 2}
+              onClick={() => getIntersection()}
+              loading={loading && selectedRows.length === 2}
+            >
+              Intersect
+            </Button>
+            <Button
+              kind="secondary"
+              disabled={selectedRows.length !== 2}
+              onClick={() => getUnion()}
+              loading={loading && selectedRows.length === 2}
+            >
+              Unify
+            </Button>
+            <Button
+              kind="secondary"
+              disabled={selectedRows.length !== 2}
+              onClick={() => getIntersectionJS()}
+              loading={loading && selectedRows.length === 2}
+            >
+              IntersectJS
+            </Button>
+          </Box>
+          <ViewLoader loading={loading}>
+            <Table
+              columns={columns}
+              emptiness="No data to show"
+              rowUniqueIdentifier="id"
+              data={data}
+              handleChange={handleChange}
+            />
+          </ViewLoader>
 
-        <Pagination
-          currentPage={queryParams.page}
-          totalItems={totalItems}
-          itemsPerPage={ITEMS_PER_PAGE}
-          disabled={loading}
-        />
-      </Card>
-      {/* Actions */}
-      <Title level={1}>Actions</Title>
-      <Card>
-        <Box direction="row" gap="space-200">
-          <Button
-            disabled={selectedRows.length !== 2}
-            onClick={() => getIntersection()}
-            loading={loading}
-          >
-            Intersect
-          </Button>
-          <Button
-            kind="secondary"
-            disabled={selectedRows.length !== 2}
-            onClick={() => getUnion()}
-            loading={loading}
-          >
-            Unify
-          </Button>
-          <Button
-            kind="warning"
-            disabled={selectedRows.length !== 2}
-            onClick={() => getIntersectionJS()}
-            loading={loading}
-          >
-            IntersectJS
-          </Button>
+          <Pagination
+            currentPage={queryParams.page}
+            totalItems={totalItems}
+            itemsPerPage={ITEMS_PER_PAGE}
+            disabled={loading}
+          />
         </Box>
       </Card>
     </>
