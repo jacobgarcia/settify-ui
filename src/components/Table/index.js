@@ -1,15 +1,8 @@
-import React, {
-  useRef,
-  useState,
-  useCallback,
-  useMemo,
-  useEffect,
-} from 'react';
+import React, { useRef, useState, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 
 import { Emptiness, Loading, ViewLoader } from '@credijusto/ui-components';
 
-import Checkbox from 'components/Checkbox';
 import Head from './Head';
 import Body from './Body';
 import Footer from './Footer';
@@ -81,31 +74,11 @@ const Table = ({
   totals,
   averages,
   alternateLinkStyle,
-  handleChange,
 }) => {
   const headRef = useRef(null);
 
   const [sortBy, setSortBy] = useState('');
   const [newColumns, setNewColumns] = useState(columns);
-  // Add CJCheckbox as a first column
-  useEffect(
-    () => {
-      const checkedColumn = {
-        key: 'check',
-        cellRender: (check) => (
-          <Checkbox
-            name={check}
-            value
-            onChange={(value, name) => handleChange(value, name)}
-          />
-        ),
-      };
-      const arr = [...newColumns];
-      arr.unshift(checkedColumn);
-      setNewColumns(arr);
-    },
-    [columns]
-  );
   const sortedData = useMemo(() => sortData(data, sortBy, columns), [
     data,
     sortBy,
@@ -228,7 +201,6 @@ Table.propTypes = {
   totals: PropTypes.arrayOf(PropTypes.string),
   averages: PropTypes.arrayOf(PropTypes.string),
   alternateLinkStyle: PropTypes.bool,
-  handleChange: PropTypes.func.isRequired,
 };
 
 export default Table;

@@ -9,32 +9,13 @@ import {
   Box,
 } from '@credijusto/ui-components';
 
+import Checkbox from 'components/Checkbox';
 import Table from 'components/Table';
 import Success from 'components/Success';
 import Button from 'components/Button';
 import Pagination from 'components/Pagination';
 import API from 'api';
 import { intersect } from 'api/spotify';
-
-const columns = [
-  {
-    linkTo: 'https://open.spotify.com/playlist/:id',
-    key: 'name',
-    label: 'Name',
-  },
-  {
-    key: 'owner',
-    label: 'Owner',
-  },
-  {
-    key: 'scope',
-    label: 'Scope',
-  },
-  {
-    key: 'tracks',
-    label: 'Tracks',
-  },
-];
 
 const ITEMS_PER_PAGE = 20;
 
@@ -55,6 +36,41 @@ const Playlists = ({ queryParams }) => {
       setSelectedRows((state) => state.filter((e) => e !== name));
     }
   };
+
+  const columns = [
+    {
+      key: 'check',
+      label: '',
+      cellRender: (check) => {
+        const defaultValue = selectedRows.includes(check);
+        return (
+          <Checkbox
+            name={check}
+            defaultValue={defaultValue}
+            onChange={(value, name) => handleChange(value, name)}
+            disabled={selectedRows.length >= 2 && !defaultValue}
+          />
+        );
+      },
+    },
+    {
+      linkTo: 'https://open.spotify.com/playlist/:id',
+      key: 'name',
+      label: 'Name',
+    },
+    {
+      key: 'owner',
+      label: 'Owner',
+    },
+    {
+      key: 'scope',
+      label: 'Scope',
+    },
+    {
+      key: 'tracks',
+      label: 'Tracks',
+    },
+  ];
 
   const getData = async () => {
     try {
@@ -225,11 +241,11 @@ const Playlists = ({ queryParams }) => {
           </Box>
           <ViewLoader loading={loading}>
             <Table
+              key={selectedRows}
               columns={columns}
               emptiness="No data to show"
               rowUniqueIdentifier="id"
               data={data}
-              handleChange={handleChange}
             />
           </ViewLoader>
 
