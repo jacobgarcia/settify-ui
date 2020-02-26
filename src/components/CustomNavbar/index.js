@@ -14,7 +14,6 @@ const playlists = {
 const SettifyNavbar = () => {
   const { getProfile } = useAuth();
   const { name, image } = getProfile();
-  console.log(image[0].url);
   const navItems = [playlists];
 
   return (
