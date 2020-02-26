@@ -3,12 +3,15 @@ import PropTypes from 'prop-types';
 import store from 'store';
 
 import { Notify } from '@credijusto/ui-components';
+import API from 'api';
 
 const AuthContext = React.createContext();
 export const SPOTIFY_TOKEN = 'spotifyToken';
 export const TOKEN_EXPIRATION = 'tokenExpiration';
 export const NAME = 'name';
 export const EMAIL = 'email';
+export const ID = 'id';
+export const IMAGE = 'image';
 
 /**
  * Returns the user profile from the local storage
@@ -17,10 +20,19 @@ export const EMAIL = 'email';
 const getProfile = () => {
   const name = store.get(NAME);
   const email = store.get(EMAIL);
+  const image = store.get(IMAGE);
   return {
     name,
     email,
+    image,
   };
+};
+
+const setProfile = (name, email, id, image) => {
+  store.set(NAME, name);
+  store.set(EMAIL, email);
+  store.set(ID, id);
+  store.set(IMAGE, image);
 };
 
 export const AuthProvider = ({ children }) => {
@@ -42,6 +54,14 @@ export const AuthProvider = ({ children }) => {
     try {
       // Then set the token to avoid errors in expected values
       setToken(tokenData);
+      // Then make a call to the API to get the user information
+      const {
+        display_name: name,
+        id,
+        email,
+        images,
+      } = await API.Spotify.GetProfile();
+      setProfile(name, email, id, images);
     } catch (error) {
       Notify.error('Ocurrió un error en el servidor al iniciar sesión.');
     }

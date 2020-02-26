@@ -74,6 +74,7 @@ const Spotify = {
     request({
       url: `/union?firstPlaylist=${firstPlaylist}&secondPlaylist=${secondPlaylist}`,
     }),
+  GetProfile: () => request({ url: '/me' }),
 };
 
 export default {
