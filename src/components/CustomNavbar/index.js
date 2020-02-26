@@ -5,7 +5,7 @@ import useAuth from 'hooks/auth';
 
 const playlists = {
   icon: 'music-box',
-  label: 'Playlists',
+  label: 'My Playlists',
   to: '/',
   id: 'playlists',
   color: '#0db654',
