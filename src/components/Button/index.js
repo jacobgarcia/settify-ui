@@ -63,7 +63,7 @@ Button.defaultProps = {
   onClick: () => {},
   children: '',
   disabled: false,
-  rounded: false,
+  rounded: true,
   loading: false,
   uppercase: false,
   id: '',

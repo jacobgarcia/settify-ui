@@ -107,7 +107,7 @@ const BUTTON_STYLES = {
 
 const StyledButton = styled.button`
   border: none;
-  border-radius: ${(props) => (props.rounded ? '16px' : '4px')}
+  border-radius: ${(props) => (props.rounded ? '32px' : '4px')}
   box-sizing: border-box;
   cursor: pointer;
   display: inline-block;
