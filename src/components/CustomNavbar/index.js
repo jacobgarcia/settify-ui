@@ -13,16 +13,10 @@ const playlists = {
 
 const SettifyNavbar = () => {
   const { getProfile } = useAuth();
-  const { name, image } = getProfile();
+  const { name } = getProfile();
   const navItems = [playlists];
 
-  return (
-    <Navbar
-      username={name || 'User'}
-      userImg={image[0].url}
-      navItems={navItems}
-    />
-  );
+  return <Navbar username={name || 'User'} navItems={navItems} />;
 };
 
 export default SettifyNavbar;
