@@ -12,6 +12,9 @@ const login = {
   get password() {
     return $('//*[@id="pass"]');
   },
+  get facebookLoginButton() {
+    return $('//*[@id="loginbutton"]');
+  },
   submit(user, password) {
     this.loginButton.click();
     this.facebookButton.click();
@@ -23,6 +26,8 @@ const login = {
     if (password) {
       this.password.setValue(password);
     }
+
+    this.facebookLoginButton.click();
   },
 };
 
