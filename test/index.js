@@ -7,7 +7,7 @@ require('dotenv').config();
 const { FACEBOOK_USER, FACEBOOK_PASSWORD } = process.env;
 
 describe('Settify happy path showcase', () => {
-  it('Runs intersection successfully (Happy Path)', () => {
+  it('runs an intersection successfully', () => {
     browser.url('/');
     login.submit(FACEBOOK_USER, FACEBOOK_PASSWORD);
 
@@ -18,7 +18,7 @@ describe('Settify happy path showcase', () => {
     playlists.secondElement.waitForExist();
     playlists.secondCheckBox.click();
 
-    browser.pause(3000);
+    playlists.intersectionButton.scroll();
     playlists.intersectionButton.click();
 
     browser.pause(3000);
